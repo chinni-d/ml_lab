@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def gaussian_kernel(x, xi, tau):
+    return np.exp((x - xi)**2 / (-2 * tau**2))
+
+def locally_weighted_regression(X_train, y_train, x_query, tau):
+    m = len(X_train)
+    X = np.column_stack((np.ones(m), X_train))
+    W = np.diag([gaussian_kernel(x_query, xi, tau) for xi in X_train])
+    theta = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ y_train
+    return theta
+
+# Prepare the dataset
+X_train = np.array([1, 2, 3, 4, 5, 6])
+y_train = np.array([1, 3, 2, 5, 4, 6])
+
+# Choose query points for prediction
+x_query = np.linspace(0, 7, 100)
+
+# Choose tau
+tau = 0.5
+
+# Perform locally weighted regression for each query point
+y_pred = []
+for x in x_query:
+    theta = locally_weighted_regression(X_train, y_train, x, tau)
+    y_pred.append(theta[0] + theta[1] * x)
+
+# Plot the original data points and the fitted curve
+plt.scatter(X_train, y_train, color='blue', label='Original Data')
+plt.plot(x_query, y_pred, color='red', label='Locally Weighted Regression')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Locally Weighted Regression')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# In[ ]:
+
+
+
+

@@ -1,0 +1,11 @@
+age,income,education,marital_status,purchased
+25,50000,Bachelors,Single,No
+32,60000,Masters,Married,Yes
+45,80000,PhD,Married,Yes
+22,40000,Bachelors,Single,No
+35,58000,Masters,Married,Yes
+28,54000,Bachelors,Single,No
+40,65000,PhD,Divorced,Yes
+50,70000,Masters,Married,Yes
+29,52000,Bachelors,Single,No
+38,67000,Masters,Married,Yes
